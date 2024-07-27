@@ -1,0 +1,33 @@
+class Solution
+{
+	public:
+	//Function to return list containing vertices in Topological order. 
+	
+	void function(int V,int start,vector<int>adj[],vector<bool> &visited,stack<int>&st){
+	    visited[start]=true;
+	    for(auto j:adj[start]){
+	        if(!visited[j]){
+	            function(V,j,adj,visited,st);
+	        }
+	    }
+	    st.push(start);
+	}
+	
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    stack<int>st;
+	    vector<bool>visited(V,false);
+	     for(int i=0;i<V;i++){
+	         if(!visited[i]){
+	             function(V,i,adj,visited,st);
+	         }
+	     }
+	    vector<int>ans;
+	    while(!st.empty()){
+	        ans.push_back(st.top());
+	        st.pop();
+	    }
+	    return ans;
+	   
+	}
+};
